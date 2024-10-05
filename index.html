@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Inicio de Sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        #loggedInWindow {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="loginContainer">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Correo electrónico" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <div id="message" class="message" style="display: none;"></div>
+    </div>
+
+    <div class="container" id="loggedInWindow" style="display: none;">
+        <h2>Sesión Iniciada</h2>
+        <p>Bienvenido, has iniciado sesión correctamente.</p>
+        <button id="logoutButton">Cerrar Sesión</button>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const loginContainer = document.getElementById('loginContainer');
+        const loggedInWindow = document.getElementById('loggedInWindow');
+        const logoutButton = document.getElementById('logoutButton');
+        const messageElement = document.getElementById('message');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Simulación de autenticación
+            if (email === 'usuario@ejemplo.com' && password === 'contraseña123') {
+                loginContainer.style.display = 'none';
+                loggedInWindow.style.display = 'block';
+            } else {
+                messageElement.textContent = 'Correo electrónico o contraseña incorrectos.';
+                messageElement.className = 'message error';
+                messageElement.style.display = 'block';
+            }
+        });
+
+        logoutButton.addEventListener('click', function() {
+            loginContainer.style.display = 'block';
+            loggedInWindow.style.display = 'none';
+            loginForm.reset();
+            messageElement.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
